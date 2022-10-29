@@ -1,15 +1,12 @@
 ﻿using System;
 
-namespace FlowControl
-{
-    public class Program
-    {
+namespace FlowControl {
+    public class Program {
         //create global variables to hold users login data.
         public static string username;
         public static string password;
 
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
             Console.WriteLine("Hello World!");
 
             //Challenge 1. Temperature Advice
@@ -18,8 +15,7 @@ namespace FlowControl
 
             //Challenge 2. Login system.
             Register();
-            if (Login())
-            {
+            if (Login()) {
                 Console.WriteLine("Congratulations, You successfully logged in.");
             }
 
@@ -28,56 +24,95 @@ namespace FlowControl
             GetTemperatureTernary(temp);
         }
 
-        // This method gets a valid temperaturebetween -40 asnd 135 inclusive 
-        // and returns the valid int.
-        public static int GetValidTemperature()
-        {
-            throw new NotImplementedException();
+        // Challenge 1
+        public static int GetValidTemperature() {
+            Console.WriteLine("Enter temperature: ");
+            string userTemp = Console.ReadLine();
+            int temp;
+            bool validTemp = int.TryParse(userTemp, out temp);
+            return temp;
         }
 
-        // This method has one int parameter
-        // It gives outdoor activity advice and temperature opinion based on 20 degree
-        // increments starting at -20 and ending at 135 
-        // n < -20 = hella cold
-        // -20 <= n < 0 = pretty cold
-        //  0 <= n < 20 = cold
-        // 20 <= n < 40 = thawed out
-        // 40 <= n < 60 = feels like Autumn
-        // 60 <= n < 80 = perfect outdoor workout temperature
-        // 80 <= n < 90 = niiice
-        // 90 <= n < 100 = hella hot
-        // 100 <= n < 135 = hottest
-        public static void GiveActivityAdvice(int temp)
-        {
-            throw new NotImplementedException();
+        public static void GiveActivityAdvice(int temp) {
+            Console.WriteLine($"Current temperature: {temp} degrees");
+
+
+            // 20 <= n < 40 = thawed out
+            // 40 <= n < 60 = feels like Autumn
+            // 60 <= n < 80 = perfect outdoor workout temperature
+            // 80 <= n < 90 = niiice
+            // 90 <= n < 100 = hella hot
+            // 100 <= n < 135 = hottest
+
+            if (temp < -20) {
+                Console.WriteLine("hella cold");
+            } else if (temp >= -20 && temp < 0) {
+                Console.WriteLine("pretty cold");
+            } else if (temp >= 0 && temp < 20) {
+                Console.WriteLine("cold");
+            } else if (temp >= 20 && temp < 40) {
+                Console.WriteLine("thawed out");
+            } else if (temp >= 40 && temp < 60) {
+                Console.WriteLine("feels like Autumn");
+            } else if (temp >= 60 && temp < 80) {
+                Console.WriteLine("perfect outdoor workout temperature");
+            } else if (temp >= 80 && temp < 90) {
+                Console.WriteLine("niiice");
+            } else if (temp >= 90 && temp < 100) {
+                Console.WriteLine("hella hot");
+            } else if (temp >= 90 && temp < 135) {
+                Console.WriteLine("hottest");
+            }
         }
 
-        // This method gets a username and password from the user
-        // and stores that data in the global variables of the 
-        // names in the method.
-        public static void Register()
-        {
-            throw new NotImplementedException();
+        // Challenge 2
+        public static void Register() {
+            Console.WriteLine("Enter username: ");
+            Program.username = Console.ReadLine();
+            Console.WriteLine("Username saved.");
+
+            Console.WriteLine("Enter password: ");
+            Program.password = Console.ReadLine();
+            Console.WriteLine("Password saved.");
+
         }
 
-        // This method gets username and password from the user and
-        // compares them with the username and password global variables
-        // or the names provided. If the password and username match,
-        // the method returns true. If they do not match, the user is 
-        // prompted again for the username and password.
-        public static bool Login()
-        {
-            throw new NotImplementedException();
+        public static bool Login() {
+            bool repeatPrompts = true;
+            bool validLogin = false;
+            while (repeatPrompts) {
+                Console.WriteLine("Enter saved username: ");
+                string username = Console.ReadLine();
+                Console.WriteLine("Enter saved password: ");
+                string password = Console.ReadLine();
+
+                if (username == Program.username && password == Program.password) {
+                    validLogin = true;
+                    repeatPrompts = false;
+                    break;
+                } else {
+                    Console.WriteLine("Incorrect username or password. Please enter again.");
+                    continue;
+                }
+            }
+
+            return validLogin;
         }
 
+        // Challenge 3
         // This method as one int parameter.
-        // It checks is the int is <=42, between
-        // 43 and 78 inclusive, or > 78.
-        // For each temperature range, a different 
-        // advice is given. 
-        public static void GetTemperatureTernary(int temp)
-        {
-           throw new NotImplementedException();
+        // It checks is the int is
+        // <=42, between 43 and 78 inclusive, or > 78.
+        // For each temperature range, a different advice is given.
+        public static void GetTemperatureTernary(int temp) {
+            if (temp <= 42) {
+                Console.WriteLine($"{temp} is too cold!");
+            } else if (temp >= 43 && temp <= 78) {
+                Console.WriteLine($"{temp} is an ok temperature.");
+            } else if (temp > 78) {
+                Console.WriteLine($"{temp} is too hot!");
+            }
+
         }
-    }//end of Program()
+    } // end of Program()
 }
